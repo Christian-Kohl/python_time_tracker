@@ -1,9 +1,18 @@
+import sys
+import os
+import subprocess
+import re
+
 # Actual class to keep track of the time spent on the computer, it will take note of an individual application, or a specific website.
 
 
-def main():
-    return
-
+def main_track():
+    current_window_object = None
+    current_raw_data = None
+    while True:
+        new_raw_data = get_active_window_raw()
+        if new_raw_data != current_raw_data:
+            print(yas)
 # Method to keep track of the time, and increment each few seconds, to see what exactly the computer is focussed on
 
 
@@ -38,4 +47,7 @@ def get_active_window_raw():
 
 # Method to identify what application is being used by the user at this specific time
 
-# Methods to check Google Chrome, or Firefox to identify what tab is open.
+
+def get_window_object():
+    return
+    # Methods to check Google Chrome, or Firefox to identify what tab is open.
