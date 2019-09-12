@@ -1,7 +1,8 @@
-class windowobject:
+class Windowobject:
 
     title = None
     tab = None
+    data = None
     starttime = None
     endtime = None
     totaltime = None
