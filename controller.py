@@ -10,14 +10,18 @@ starttime = None
 
 
 def tracker():
-    folder = "track_logs"
-    starttime = datetime.now().strftime('%d-%m-%Y')
-    current_data = None
+    # folder = "track_logs"
+    # starttime = datetime.now().strftime('%d-%m-%Y')
+    # current_data = None
+    # while True:
+    #     new_data = main_track()
+    #     if new_data != current_data:
+    #         current_activity
+    #     time.sleep(5)
     while True:
-        new_data = main_track()
-        if new_data != current_data:
-            current_activity
-        time.sleep(5)
+        window = track_current_window()
+        print(window.title)
+        time.sleep(3)
 
 
 try:

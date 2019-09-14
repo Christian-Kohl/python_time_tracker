@@ -50,14 +50,19 @@ def get_active_window_raw():
 
 
 def get_window_object(current_data):
-    current_data = current_data.decode('UTF-8')
-    title = os.popen(
-        "ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}'").read()[:-1]
-    if title in ['firefox', 'chrome']:
-        temp_data = current_data.split(' - ')
-        tab = ' - '.join(temp_data[:-1])
+    if not current_data is None:
+        current_data = current_data.decode('UTF-8')
+        title = os.popen(
+            "ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}'").read()[:-1]
+        if title in ['firefox', 'chrome']:
+            temp_data = current_data.split(' - ')
+            tab = ' - '.join(temp_data[:-1])
+        else:
+            tab = current_data
     else:
-        tab = current_data
+        title = "desktop"
+        tab = None
+        data = current_data
     time = datetime.now()
     current_window = Windowobject(title, tab, current_data, time)
     return current_window
