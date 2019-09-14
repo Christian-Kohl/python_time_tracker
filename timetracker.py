@@ -9,14 +9,11 @@ import time as tttime
 # Actual class to keep track of the time spent on the computer, it will take note of an individual application, or a specific website.
 
 
-def track_current_window(window_data):
+def track_current_window():
     current_raw_data = get_active_window_raw()
+    current_window = get_window_object(current_raw_data)
+    return current_window
 
-    if window_data != current_raw_data:
-        current_window = get_window_object(current_raw_data)
-        return True, current_window
-    else:
-        return False, None
 # Method to keep track of the time, and increment each few seconds, to see what exactly the computer is focussed on
 
 
@@ -53,18 +50,20 @@ def get_active_window_raw():
 
 
 def get_window_object(current_data):
-    current_data = current_data.decode('UTF-8').split(' ')
-    if current_data[-1][0] == '~':
-        title = 'Terminal'
-        tab = current_data[-1]
-        time = datetime.now()
-        current_window = Windowobject(title, tab, time)
+    current_data = current_data.decode('UTF-8')
+    title = os.popen(
+        "ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}'").read()
+    if title in ['firefox', 'chrome']:
+        print('yaasss baby')
+        current_data = current_data.split(' - ')
+        print(current_data)
+        current_data = current_data[:-1]
+        print(current_data)
     else:
-        title = current_data[-1]
-        tab = current_data[-3]
-        time = datetime.now()
-        current_window = Windowobject(title, tab, time)
-    print(current_window.title)
+        tab = current_data
+    time = datetime.now()
+    current_window = Windowobject(title, tab, current_data, time)
+    print('title:', current_window.title[:-1])
     print(current_window.tab)
     print(current_data)
     return current_window
@@ -72,4 +71,4 @@ def get_window_object(current_data):
 
 
 tttime.sleep(5)
-print(track_current_window(None))
+print(track_current_window())

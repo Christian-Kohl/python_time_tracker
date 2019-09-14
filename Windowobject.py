@@ -7,10 +7,11 @@ class Windowobject:
     endtime = None
     totaltime = None
 
-    def __init__(self, title, tab, starttime):
+    def __init__(self, title, tab, data, starttime):
         self.starttime = starttime
         self.title = title
         self.tab = tab
+        self.data = data
         return None
 
     def end_object(self, endtime):
