@@ -60,13 +60,4 @@ def get_window_object(current_data):
         tab = current_data
     time = datetime.now()
     current_window = Windowobject(title, tab, current_data, time)
-    print('title:', current_window.title)
-    print(current_window.tab)
-    print(current_data)
-    print(time)
     return current_window
-    # Methods to check Google Chrome, or Firefox to identify what tab is open.
-
-
-tttime.sleep(2)
-track_current_window()
