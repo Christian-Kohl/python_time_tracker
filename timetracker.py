@@ -52,23 +52,21 @@ def get_active_window_raw():
 def get_window_object(current_data):
     current_data = current_data.decode('UTF-8')
     title = os.popen(
-        "ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}'").read()
+        "ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}'").read()[:-1]
     if title in ['firefox', 'chrome']:
-        print('yaasss baby')
-        current_data = current_data.split(' - ')
-        print(current_data)
-        current_data = current_data[:-1]
-        print(current_data)
+        temp_data = current_data.split(' - ')
+        tab = ' - '.join(temp_data[:-1])
     else:
         tab = current_data
     time = datetime.now()
     current_window = Windowobject(title, tab, current_data, time)
-    print('title:', current_window.title[:-1])
+    print('title:', current_window.title)
     print(current_window.tab)
     print(current_data)
+    print(time)
     return current_window
     # Methods to check Google Chrome, or Firefox to identify what tab is open.
 
 
-tttime.sleep(5)
-print(track_current_window())
+tttime.sleep(2)
+track_current_window()
