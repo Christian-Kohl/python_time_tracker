@@ -16,4 +16,12 @@ class Windowobject:
 
     def end_object(self, endtime):
         self.endtime = endtime
-        self.totaltime = endtime - starttime
+        self.totaltime = self.endtime - self.starttime
+
+    def update_website_entity(self):
+        if self.title in ['chrome', 'firefox']:
+            tab_info = self.tab.split(' - ')
+            if tab_info[-1] in ['Netflix', 'YouTube', 'Facebook', 'Instagram']:
+                self.title = tab_info[-1]
+            elif 'reddit' in self.title:
+                self.title = 'Reddit'
