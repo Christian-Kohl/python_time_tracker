@@ -28,6 +28,13 @@ try:
 except KeyboardInterrupt:
     print('That\'s a shame :(')
     current_list[-1].end_object(datetime.now())
+    total_dict = dict()
     for x in current_list:
+        if x.title in total_dict:
+            total_dict[x.title] += x.totaltime
+        else:
+            total_dict[x.title] = x.totaltime
         print(x.title)
         print(x.totaltime)
+
+    print("Total: {}".format(total_dict))
