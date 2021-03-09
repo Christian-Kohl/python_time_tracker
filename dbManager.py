@@ -2,7 +2,7 @@ import pymongo
 import datetime
 
 
-def insertEntry():
+def insertEntry(program, window):
     entryDict = {"time": datetime.datetime.now(),
                  "program": "nudes",
                  "window": "dudes"
@@ -17,6 +17,5 @@ mongoDB = mongoClient["trackingDatabase"]
 
 tracking = mongoDB["trackerEntry"]
 
-insertEntry()
 
 print(tracking.find_one())
