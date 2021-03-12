@@ -4,8 +4,8 @@ import datetime
 
 def insertEntry(program, window):
     entryDict = {"time": datetime.datetime.now(),
-                 "program": "nudes",
-                 "window": "dudes"
+                 "program": program,
+                 "window": window
                  }
     tracking.insert_one(entryDict)
 
@@ -14,6 +14,14 @@ def insertCategory(category, item):
     categoryDict = {"program": item,
                     "category": category}
     categories.insert_one(categoryDict)
+
+
+def getPreviousData():
+    pd = tracking.find()
+    li = []
+    for x in pd:
+        li += [x]
+    return li
 
 
 mongoClient = pymongo.MongoClient("mongodb://localhost:27017/")
