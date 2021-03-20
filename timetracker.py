@@ -16,30 +16,11 @@ def track():
             "xdotool getwindowfocus getwindowname", shell=True
             ).decode("utf-8").rstrip()
     currentTime = datetime.now()
-    dbManager.insertEntry(currentProc, currentWin)
+    dbManager.addToEntry(currentProc, currentWin)
     print(currentTime)
 
 
-def updateHistory():
-    data = dbManager.getPreviousData()
-    groups = itertools.groupby(
-                data, key=lambda x: x["time"].date()
-                )
-    for i in groups:
-        if i[0] < datetime.datetime.now().date():
-            createDayEntry(i[0], i[1])
-        for j in i[1]:
-            print(j)
-
-
-def createDayEntry(date, entries):
-    entryList = []
-    for entry in entries:
-        entryList += [entry]
-
-
 if __name__ == "__main__":
-    updateHistory()
     schedule.every(2).minutes.do(track)
 
     track()
